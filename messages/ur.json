@@ -1,0 +1,54 @@
+{
+  "nav": {
+    "home": "ہوم",
+    "destinations": "مقامات",
+    "tours": "ٹورز",
+    "hotels": "ہوٹلز",
+    "vehicles": "گاڑیاں",
+    "blog": "بلاگ",
+    "gallery": "گیلری",
+    "faqs": "سوالات",
+    "contact": "رابطہ",
+    "inquireNow": "ابھی پوچھیں"
+  },
+  "home": {
+    "heroFallbackTitle": "پاکستان کی روح دریافت کریں",
+    "heroFallbackSubtitle": "پہاڑوں، وادیوں اور ثقافت کے منتخب سفر",
+    "exploreTours": "ٹورز دیکھیں",
+    "featuredDestinations": "نمایاں مقامات",
+    "featuredTours": "نمایاں ٹورز",
+    "whyUs": "ہمارے ساتھ کیوں سفر کریں",
+    "latestFromBlog": "بلاگ سے تازہ ترین",
+    "readyForAdventure": "اگلی مہم جوئی کے لیے تیار ہیں؟",
+    "readySubtitle": "اپنی سفر کی تاریخیں بتائیں، ہم بہترین منصوبہ بنائیں گے۔",
+    "sendInquiry": "درخواست بھیجیں"
+  },
+  "common": {
+    "viewAll": "سب دیکھیں",
+    "viewDetails": "تفصیلات دیکھیں",
+    "from": "شروع",
+    "days": "دن",
+    "nights": "راتیں",
+    "readMore": "مزید پڑھیں",
+    "submit": "جمع کروائیں",
+    "name": "پورا نام",
+    "email": "ای میل ایڈریس",
+    "phone": "فون نمبر",
+    "message": "پیغام",
+    "travelDate": "سفر کی مطلوبہ تاریخ",
+    "guests": "مہمانوں کی تعداد",
+    "inquirySuccess": "شکریہ! آپ کی درخواست موصول ہو گئی ہے۔ ہماری ٹیم جلد رابطہ کرے گی۔",
+    "loading": "لوڈ ہو رہا ہے...",
+    "noResults": "کوئی نتیجہ نہیں ملا۔"
+  },
+  "footer": {
+    "tagline": "مہم جوئی اور ثقافت کا دروازہ",
+    "quickLinks": "فوری روابط",
+    "followUs": "ہمیں فالو کریں",
+    "newsletter": "نیوز لیٹر سبسکرائب کریں",
+    "newsletterPlaceholder": "آپ کا ای میل ایڈریس",
+    "subscribe": "سبسکرائب کریں",
+    "rights": "جملہ حقوق محفوظ ہیں۔",
+    "since": "رجسٹرڈ ٹریول کمپنی 2019 سے"
+  }
+}

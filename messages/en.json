@@ -1,0 +1,54 @@
+{
+  "nav": {
+    "home": "Home",
+    "destinations": "Destinations",
+    "tours": "Tours",
+    "hotels": "Hotels",
+    "vehicles": "Vehicles",
+    "blog": "Blog",
+    "gallery": "Gallery",
+    "faqs": "FAQs",
+    "contact": "Contact",
+    "inquireNow": "Inquire Now"
+  },
+  "home": {
+    "heroFallbackTitle": "Discover the Soul of Pakistan",
+    "heroFallbackSubtitle": "Curated tours across mountains, valleys and culture",
+    "exploreTours": "Explore Tours",
+    "featuredDestinations": "Featured Destinations",
+    "featuredTours": "Featured Tours",
+    "whyUs": "Why Travel With Us",
+    "latestFromBlog": "Latest From the Blog",
+    "readyForAdventure": "Ready for Your Next Adventure?",
+    "readySubtitle": "Tell us your travel dates and we'll craft the perfect itinerary.",
+    "sendInquiry": "Send an Inquiry"
+  },
+  "common": {
+    "viewAll": "View All",
+    "viewDetails": "View Details",
+    "from": "From",
+    "days": "Days",
+    "nights": "Nights",
+    "readMore": "Read More",
+    "submit": "Submit",
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "message": "Message",
+    "travelDate": "Preferred Travel Date",
+    "guests": "Number of Guests",
+    "inquirySuccess": "Thank you! Your inquiry has been received. Our team will contact you shortly.",
+    "loading": "Loading...",
+    "noResults": "No results found."
+  },
+  "footer": {
+    "tagline": "Gateway to Adventure and Culture",
+    "quickLinks": "Quick Links",
+    "followUs": "Follow Us",
+    "newsletter": "Subscribe to our Newsletter",
+    "newsletterPlaceholder": "Your email address",
+    "subscribe": "Subscribe",
+    "rights": "All rights reserved.",
+    "since": "Registered Travel Company Since 2019"
+  }
+}

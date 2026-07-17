@@ -1,0 +1,281 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+}
+
+enum InquiryStatus {
+  NEW
+  CONTACTED
+  CONFIRMED
+  CLOSED
+}
+
+enum InquiryType {
+  TOUR
+  HOTEL
+  VEHICLE
+  CUSTOM
+  GENERAL
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  passwordHash  String
+  role          Role      @default(EDITOR)
+  image         String?
+  active        Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  activityLogs  ActivityLog[]
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  action    String
+  entity    String
+  entityId  String?
+  meta      Json?
+  createdAt DateTime @default(now())
+}
+
+model Destination {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  nameUr      String?
+  region      String
+  summary     String
+  summaryUr   String?
+  description String
+  descriptionUr String?
+  coverImage  String
+  images      String[]
+  latitude    Float?
+  longitude   Float?
+  bestSeason  String?
+  featured    Boolean  @default(false)
+  published   Boolean  @default(true)
+  metaTitle   String?
+  metaDesc    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tours       Tour[]
+}
+
+model Tour {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  titleUr       String?
+  destinationId String?
+  destination   Destination? @relation(fields: [destinationId], references: [id])
+  summary       String
+  summaryUr     String?
+  durationDays  Int
+  durationNights Int
+  priceFrom     Decimal  @db.Decimal(10, 2)
+  priceCurrency String   @default("PKR")
+  groupSizeMax  Int?
+  difficulty    String?
+  itinerary     Json
+  inclusions    String[]
+  exclusions    String[]
+  meals         String[]
+  weatherInfo   String?
+  packingList   String[]
+  policies      String?
+  mapEmbedUrl   String?
+  coverImage    String
+  images        String[]
+  featured      Boolean  @default(false)
+  published     Boolean  @default(true)
+  metaTitle     String?
+  metaDesc      String?
+  hotels        TourHotel[]
+  vehicles      TourVehicle[]
+  inquiries     Inquiry[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Hotel {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  nameUr      String?
+  city        String
+  stars       Int      @default(3)
+  description String
+  amenities   String[]
+  coverImage  String
+  images      String[]
+  priceFrom   Decimal? @db.Decimal(10, 2)
+  featured    Boolean  @default(false)
+  published   Boolean  @default(true)
+  tours       TourHotel[]
+  inquiries   Inquiry[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TourHotel {
+  id       String @id @default(cuid())
+  tourId   String
+  tour     Tour   @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  hotelId  String
+  hotel    Hotel  @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  nights   Int    @default(1)
+
+  @@unique([tourId, hotelId])
+}
+
+model Vehicle {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  type        String
+  capacity    Int
+  description String
+  features    String[]
+  coverImage  String
+  images      String[]
+  priceFrom   Decimal? @db.Decimal(10, 2)
+  published   Boolean  @default(true)
+  tours       TourVehicle[]
+  inquiries   Inquiry[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TourVehicle {
+  id        String  @id @default(cuid())
+  tourId    String
+  tour      Tour    @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  vehicleId String
+  vehicle   Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@unique([tourId, vehicleId])
+}
+
+model Blog {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  titleUr     String?
+  excerpt     String
+  content     String
+  contentUr   String?
+  coverImage  String
+  authorName  String   @default("Pakistan Tourism Gateway")
+  tags        String[]
+  published   Boolean  @default(true)
+  metaTitle   String?
+  metaDesc    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model GalleryImage {
+  id        String   @id @default(cuid())
+  title     String?
+  category  String   @default("general")
+  imageUrl  String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model FAQ {
+  id        String   @id @default(cuid())
+  question  String
+  questionUr String?
+  answer    String
+  answerUr  String?
+  category  String   @default("general")
+  order     Int      @default(0)
+  published Boolean  @default(true)
+}
+
+model HeroSlide {
+  id          String   @id @default(cuid())
+  title       String
+  titleUr     String?
+  subtitle    String?
+  subtitleUr  String?
+  image       String
+  ctaLabel    String?
+  ctaHref     String?
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+}
+
+model Inquiry {
+  id          String        @id @default(cuid())
+  type        InquiryType   @default(GENERAL)
+  name        String
+  email       String
+  phone       String
+  message     String?
+  travelDate  DateTime?
+  guests      Int?
+  tourId      String?
+  tour        Tour?         @relation(fields: [tourId], references: [id])
+  hotelId     String?
+  hotel       Hotel?        @relation(fields: [hotelId], references: [id])
+  vehicleId   String?
+  vehicle     Vehicle?      @relation(fields: [vehicleId], references: [id])
+  status      InquiryStatus @default(NEW)
+  notes       String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model MediaAsset {
+  id        String   @id @default(cuid())
+  url       String
+  filename  String
+  mimeType  String?
+  size      Int?
+  folder    String   @default("general")
+  createdAt DateTime @default(now())
+}
+
+model SiteSettings {
+  id              String  @id @default("singleton")
+  siteName        String  @default("Pakistan Tourism Gateway")
+  logoUrl         String?
+  faviconUrl      String?
+  contactEmail    String  @default("info@paktourismgateway.com")
+  contactPhone    String  @default("+92 300 0000000")
+  whatsapp        String?
+  address         String?
+  instagramUrl    String?
+  facebookUrl     String?
+  tiktokUrl       String?
+  youtubeUrl      String?
+  metaTitle       String?
+  metaDesc        String?
+  analyticsId     String?
+  maintenanceMode Boolean @default(false)
+}
