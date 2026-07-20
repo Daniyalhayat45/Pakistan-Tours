@@ -9,7 +9,9 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 import { ItineraryEditor } from "@/components/admin/itinerary-editor";
 import type { Tour, Destination } from "@prisma/client";
 
-export function TourForm({ tour, destinations }: { tour?: Tour; destinations: Destination[] }) {
+type SerializedTour = Omit<Tour, "priceFrom"> & { priceFrom: number };
+
+export function TourForm({ tour, destinations }: { tour?: SerializedTour; destinations: Destination[] }) {
   const isEdit = !!tour;
 
   async function action(data: any) {

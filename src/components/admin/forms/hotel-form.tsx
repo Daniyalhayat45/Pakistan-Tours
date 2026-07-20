@@ -7,7 +7,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import type { Hotel } from "@prisma/client";
 
-export function HotelForm({ hotel }: { hotel?: Hotel }) {
+type SerializedHotel = Omit<Hotel, "priceFrom"> & { priceFrom: number | null };
+
+export function HotelForm({ hotel }: { hotel?: SerializedHotel }) {
   const isEdit = !!hotel;
   const action = isEdit ? (data: any) => updateHotel(hotel!.id, data) : (data: any) => createHotel(data);
 
@@ -19,7 +21,7 @@ export function HotelForm({ hotel }: { hotel?: Hotel }) {
         <Field label="Slug" name="slug"><Input name="slug" defaultValue={hotel?.slug} required /></Field>
         <Field label="City" name="city"><Input name="city" defaultValue={hotel?.city} required /></Field>
         <Field label="Stars (1-5)" name="stars"><Input name="stars" type="number" min={1} max={5} defaultValue={hotel?.stars ?? 3} required /></Field>
-        <Field label="Price From (PKR/night)" name="priceFrom"><Input name="priceFrom" type="number" min={0} defaultValue={hotel ? Number(hotel.priceFrom) : undefined} /></Field>
+        <Field label="Price From (PKR/night)" name="priceFrom"><Input name="priceFrom" type="number" min={0} defaultValue={hotel?.priceFrom ?? undefined} /></Field>
       </FieldGrid>
 
       <Field label="Description" name="description"><Textarea name="description" rows={5} defaultValue={hotel?.description} required /></Field>

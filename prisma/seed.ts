@@ -7,8 +7,9 @@ async function main() {
   console.log("Seeding database...");
 
   // --- Admin user ---
-  const adminEmail = process.env.SEED_ADMIN_EMAIL || "admin@paktourismgateway.com";
-  const adminPassword = process.env.SEED_ADMIN_PASSWORD || "ChangeMe123!";
+  // Hardcoded admin login — change this password from Admin → Users after your first login.
+  const adminEmail = "admin@paktourismgateway.com";
+  const adminPassword = "ChangeMe123!";
   const passwordHash = await bcrypt.hash(adminPassword, 10);
 
   await prisma.user.upsert({
@@ -39,6 +40,14 @@ async function main() {
       metaDesc: "Premium curated tours across Pakistan — mountains, valleys, culture and hospitality since 2019.",
     },
   });
+
+  // --- Skip re-seeding sample content if this DB already has data ---
+  // (the admin user / settings above are always safe to re-run via upsert)
+  const alreadySeeded = (await prisma.destination.count()) > 0;
+  if (alreadySeeded) {
+    console.log("Sample content already exists — skipping content seed (admin user/settings still synced).");
+    return;
+  }
 
   // --- Destinations ---
   const destinationsData = [

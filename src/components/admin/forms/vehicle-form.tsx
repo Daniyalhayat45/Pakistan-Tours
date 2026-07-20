@@ -7,7 +7,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import type { Vehicle } from "@prisma/client";
 
-export function VehicleForm({ vehicle }: { vehicle?: Vehicle }) {
+type SerializedVehicle = Omit<Vehicle, "priceFrom"> & { priceFrom: number | null };
+
+export function VehicleForm({ vehicle }: { vehicle?: SerializedVehicle }) {
   const isEdit = !!vehicle;
   const action = isEdit ? (data: any) => updateVehicle(vehicle!.id, data) : (data: any) => createVehicle(data);
 
@@ -18,7 +20,7 @@ export function VehicleForm({ vehicle }: { vehicle?: Vehicle }) {
         <Field label="Slug" name="slug"><Input name="slug" defaultValue={vehicle?.slug} required /></Field>
         <Field label="Type" name="type"><Input name="type" defaultValue={vehicle?.type} placeholder="SUV / Van / Coaster" required /></Field>
         <Field label="Capacity (seats)" name="capacity"><Input name="capacity" type="number" min={1} defaultValue={vehicle?.capacity ?? 4} required /></Field>
-        <Field label="Price From (PKR/day)" name="priceFrom"><Input name="priceFrom" type="number" min={0} defaultValue={vehicle ? Number(vehicle.priceFrom) : undefined} /></Field>
+        <Field label="Price From (PKR/day)" name="priceFrom"><Input name="priceFrom" type="number" min={0} defaultValue={vehicle?.priceFrom ?? undefined} /></Field>
         <Field label="Cover Image URL" name="coverImage"><Input name="coverImage" type="url" defaultValue={vehicle?.coverImage} required /></Field>
       </FieldGrid>
 

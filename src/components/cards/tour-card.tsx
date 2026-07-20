@@ -31,7 +31,7 @@ export function TourCard({
         <div className="mt-4 flex items-center justify-between">
           <div>
             <span className="text-xs text-muted-foreground">{t("from")}</span>
-            <p className="font-semibold text-gold-dark">{formatCurrency(tour.priceFrom, tour.priceCurrency)}</p>
+            <p className="font-semibold text-gold-dark">{formatCurrency(tour.priceFrom.toString(), tour.priceCurrency)}</p>
           </div>
           <Link href={`/${locale}/tours/${tour.slug}`} className="text-sm font-medium text-gold-dark hover:underline">
             {t("viewDetails")}

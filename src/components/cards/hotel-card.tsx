@@ -22,7 +22,7 @@ export function HotelCard({ hotel }: { hotel: { slug: string; name: string; city
           {Array.from({ length: hotel.stars }).map((_, i) => <Star key={i} className="h-3.5 w-3.5 fill-gold text-gold" />)}
         </div>
         {hotel.priceFrom && (
-          <p className="mt-3 font-semibold text-gold-dark">{t("from")} {formatCurrency(hotel.priceFrom)}</p>
+          <p className="mt-3 font-semibold text-gold-dark">{t("from")} {formatCurrency(hotel.priceFrom.toString())}</p>
         )}
       </CardContent>
     </Card>

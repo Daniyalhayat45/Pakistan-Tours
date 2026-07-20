@@ -20,7 +20,7 @@ export function VehicleCard({ vehicle }: { vehicle: { id: string; slug: string; 
         <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{vehicle.description}</p>
         <div className="mt-4 flex items-center justify-between">
           {vehicle.priceFrom ? (
-            <p className="font-semibold text-gold-dark">{t("from")} {formatCurrency(vehicle.priceFrom)}/day</p>
+            <p className="font-semibold text-gold-dark">{t("from")} {formatCurrency(vehicle.priceFrom.toString())}/day</p>
           ) : <span />}
           <InquiryButton type="VEHICLE" vehicleId={vehicle.id} label={t("viewDetails")} />
         </div>

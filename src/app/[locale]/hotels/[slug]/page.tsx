@@ -49,7 +49,7 @@ export default async function HotelDetailPage({ params }: { params: Promise<{ sl
           {hotel.priceFrom && (
             <div className="rounded-lg border border-border p-6">
               <p className="text-xs text-muted-foreground">Starting from</p>
-              <p className="text-3xl font-bold text-gold-dark">{formatCurrency(hotel.priceFrom)}</p>
+              <p className="text-3xl font-bold text-gold-dark">{formatCurrency(hotel.priceFrom.toString())}</p>
               <p className="mt-1 text-xs text-muted-foreground">per night</p>
             </div>
           )}

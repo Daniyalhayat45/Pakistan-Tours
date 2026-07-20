@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "prisma generate && prisma db push --accept-data-loss --skip-generate && tsx prisma/seed.ts && next build",
     "start": "next start",
     "lint": "next lint",
     "seed": "tsx prisma/seed.ts",
@@ -43,7 +43,8 @@
     "sonner": "1.7.2",
     "embla-carousel-react": "8.5.2",
     "date-fns": "4.1.0",
-    "slugify": "1.6.6"
+    "slugify": "1.6.6",
+    "tsx": "4.19.2"
   },
   "devDependencies": {
     "@types/node": "22.10.7",
@@ -55,7 +56,6 @@
     "autoprefixer": "10.4.20",
     "tailwindcss-animate": "1.0.7",
     "eslint": "9.18.0",
-    "eslint-config-next": "15.1.6",
-    "tsx": "4.19.2"
+    "eslint-config-next": "15.1.6"
   }
 }

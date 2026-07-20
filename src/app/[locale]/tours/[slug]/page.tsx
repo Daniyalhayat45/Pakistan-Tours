@@ -160,7 +160,7 @@ export default async function TourDetailPage({ params }: { params: Promise<{ slu
         <div className="space-y-6">
           <div className="rounded-lg border border-border p-6">
             <p className="text-xs text-muted-foreground">Starting from</p>
-            <p className="text-3xl font-bold text-gold-dark">{formatCurrency(tour.priceFrom, tour.priceCurrency)}</p>
+            <p className="text-3xl font-bold text-gold-dark">{formatCurrency(tour.priceFrom.toString(), tour.priceCurrency)}</p>
             <p className="mt-1 text-xs text-muted-foreground">per person, land only</p>
           </div>
           <div className="rounded-lg border border-border p-6">
