@@ -11,12 +11,9 @@ import "../globals.css";
 
 // All content here comes from the database (admin-editable) and next-intl reads
 // request headers to resolve the locale, so this whole tree renders per-request
-// rather than being statically pre-built.
+// rather than being statically pre-built. (generateStaticParams is intentionally
+// omitted — combining it with force-dynamic caused a React streaming error.)
 export const dynamic = "force-dynamic";
-
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await prisma.siteSettings.findUnique({ where: { id: "singleton" } }).catch(() => null);
