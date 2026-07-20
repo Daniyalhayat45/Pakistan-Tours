@@ -1,7 +1,10 @@
-import { auth } from "@/lib/auth";
+import NextAuth from "next-auth";
+import { authConfig } from "@/lib/auth.config";
 import { NextResponse } from "next/server";
 import createIntlMiddleware from "next-intl/middleware";
 import { locales, defaultLocale } from "@/i18n/config";
+
+const { auth } = NextAuth(authConfig);
 
 const intlMiddleware = createIntlMiddleware({
   locales,
