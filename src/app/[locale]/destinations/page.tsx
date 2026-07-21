@@ -1,9 +1,13 @@
 import { prisma } from "@/lib/db";
 import { DestinationCard } from "@/components/cards/destination-card";
+import { setRequestLocale } from "next-intl/server";
 
 export const metadata = { title: "Destinations | Pakistan Tourism Gateway" };
 
-export default async function DestinationsPage() {
+export default async function DestinationsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   const destinations = await prisma.destination.findMany({ where: { published: true }, orderBy: { createdAt: "desc" } });
   return (
     <div className="container py-32">

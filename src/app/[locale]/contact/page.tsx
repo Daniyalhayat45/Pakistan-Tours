@@ -1,10 +1,14 @@
 import { Mail, Phone, MapPin } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { InquiryForm } from "@/components/shared/inquiry-form";
+import { setRequestLocale } from "next-intl/server";
 
 export const metadata = { title: "Contact | Pakistan Tourism Gateway" };
 
-export default async function ContactPage() {
+export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   const settings = await prisma.siteSettings.findUnique({ where: { id: "singleton" } }).catch(() => null);
   return (
     <div className="container py-32">

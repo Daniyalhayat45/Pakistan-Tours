@@ -6,9 +6,11 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { InquiryForm } from "@/components/shared/inquiry-form";
 import { formatCurrency } from "@/lib/utils";
+import { setRequestLocale } from "next-intl/server";
 
-export default async function TourDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+export default async function TourDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const tour = await prisma.tour.findUnique({
     where: { slug },
     include: {

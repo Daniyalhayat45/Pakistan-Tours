@@ -5,9 +5,11 @@ import { prisma } from "@/lib/db";
 import { Badge } from "@/components/ui/badge";
 import { InquiryForm } from "@/components/shared/inquiry-form";
 import { formatCurrency } from "@/lib/utils";
+import { setRequestLocale } from "next-intl/server";
 
-export default async function HotelDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+export default async function HotelDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const hotel = await prisma.hotel.findUnique({ where: { slug } });
   if (!hotel || !hotel.published) notFound();
 

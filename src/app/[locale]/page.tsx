@@ -9,8 +9,12 @@ import { CtaSection } from "@/components/home/cta-section";
 import { DestinationCard } from "@/components/cards/destination-card";
 import { TourCard } from "@/components/cards/tour-card";
 import { BlogCard } from "@/components/cards/blog-card";
+import { setRequestLocale } from "next-intl/server";
 
-export default async function HomePage() {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   const t = await getTranslations("home");
 
   const [slides, destinations, tours, blogs] = await Promise.all([

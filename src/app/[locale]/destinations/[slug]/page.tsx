@@ -3,9 +3,11 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { TourCard } from "@/components/cards/tour-card";
 import { InquiryForm } from "@/components/shared/inquiry-form";
+import { setRequestLocale } from "next-intl/server";
 
-export default async function DestinationDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+export default async function DestinationDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const destination = await prisma.destination.findUnique({
     where: { slug },
     include: { tours: { where: { published: true } } },

@@ -1,9 +1,13 @@
 import { prisma } from "@/lib/db";
 import { FaqAccordion } from "@/components/shared/faq-accordion";
+import { setRequestLocale } from "next-intl/server";
 
 export const metadata = { title: "FAQs | Pakistan Tourism Gateway" };
 
-export default async function FaqsPage() {
+export default async function FaqsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   const faqs = await prisma.fAQ.findMany({ where: { published: true }, orderBy: { order: "asc" } });
   return (
     <div className="container max-w-3xl py-32">

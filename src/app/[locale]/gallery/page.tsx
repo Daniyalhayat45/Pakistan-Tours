@@ -1,9 +1,13 @@
 import Image from "next/image";
 import { prisma } from "@/lib/db";
+import { setRequestLocale } from "next-intl/server";
 
 export const metadata = { title: "Gallery | Pakistan Tourism Gateway" };
 
-export default async function GalleryPage() {
+export default async function GalleryPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   const images = await prisma.galleryImage.findMany({ orderBy: { order: "asc" } });
   return (
     <div className="container py-32">
