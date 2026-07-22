@@ -6,6 +6,7 @@ import { Toaster } from "sonner";
 import { locales, type Locale } from "@/i18n/config";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { PageTransition } from "@/components/layout/page-transition";
 import { prisma } from "@/lib/db";
 import "../globals.css";
 
@@ -42,7 +43,7 @@ export default async function LocaleLayout({
       <body className={locale === "ur" ? "font-urdu" : "font-sans"}>
         <NextIntlClientProvider messages={messages}>
           <Navbar />
-          <main className="min-h-screen">{children}</main>
+          <main className="min-h-screen"><PageTransition>{children}</PageTransition></main>
           <Footer />
           <Toaster position="top-center" richColors />
         </NextIntlClientProvider>

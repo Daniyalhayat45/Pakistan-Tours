@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { Star, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { SafeImage } from "@/components/shared/safe-image";
 import { formatCurrency } from "@/lib/utils";
 
 export function HotelCard({ hotel }: { hotel: { slug: string; name: string; city: string; stars: number; coverImage: string; priceFrom: any } }) {

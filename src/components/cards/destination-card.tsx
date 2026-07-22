@@ -1,14 +1,14 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useLocale } from "next-intl";
 import { MapPin } from "lucide-react";
+import { SafeImage } from "@/components/shared/safe-image";
 
 export function DestinationCard({ d }: { d: { slug: string; name: string; region: string; summary: string; coverImage: string } }) {
   const locale = useLocale();
   return (
     <Link href={`/${locale}/destinations/${d.slug}`} className="group relative block overflow-hidden rounded-lg">
       <div className="relative aspect-[4/5] w-full overflow-hidden">
-        <Image src={d.coverImage} alt={d.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 768px) 100vw, 33vw" />
+        <SafeImage src={d.coverImage} alt={d.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 768px) 100vw, 33vw" />
         <div className="absolute inset-0 bg-gradient-to-t from-onyx via-onyx/20 to-transparent" />
       </div>
       <div className="absolute bottom-0 left-0 right-0 p-5 text-white">

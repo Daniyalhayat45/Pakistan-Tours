@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { useLocale, useTranslations } from "next-intl";
+import { getTranslations, getLocale } from "next-intl/server";
 import { Instagram, Facebook, Youtube, Mountain } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { NewsletterForm } from "./newsletter-form";
 
 export async function Footer() {
-  const t = useTranslations("footer");
-  const nav = useTranslations("nav");
-  const locale = useLocale();
+  const t = await getTranslations("footer");
+  const nav = await getTranslations("nav");
+  const locale = await getLocale();
   const settings = await prisma.siteSettings.findUnique({ where: { id: "singleton" } }).catch(() => null);
 
   return (

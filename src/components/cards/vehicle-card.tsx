@@ -1,9 +1,9 @@
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Users } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { InquiryButton } from "@/components/shared/inquiry-dialog";
+import { SafeImage } from "@/components/shared/safe-image";
 import { formatCurrency } from "@/lib/utils";
 
 export function VehicleCard({ vehicle }: { vehicle: { id: string; slug: string; name: string; type: string; capacity: number; coverImage: string; priceFrom: any; description: string } }) {
@@ -11,7 +11,7 @@ export function VehicleCard({ vehicle }: { vehicle: { id: string; slug: string; 
   return (
     <Card className="overflow-hidden">
       <div className="relative aspect-[4/3] w-full overflow-hidden">
-        <Image src={vehicle.coverImage} alt={vehicle.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+        <SafeImage src={vehicle.coverImage} alt={vehicle.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
         <Badge className="absolute left-3 top-3">{vehicle.type}</Badge>
       </div>
       <CardContent className="p-5">

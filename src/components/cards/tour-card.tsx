@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { SafeImage } from "@/components/shared/safe-image";
 import { formatCurrency } from "@/lib/utils";
 
 export function TourCard({
@@ -17,7 +17,7 @@ export function TourCard({
     <Card className="overflow-hidden transition-shadow hover:shadow-xl">
       <Link href={`/${locale}/tours/${tour.slug}`} className="block">
         <div className="relative aspect-[4/3] w-full overflow-hidden">
-          <Image src={tour.coverImage} alt={tour.title} fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
+          <SafeImage src={tour.coverImage} alt={tour.title} fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
           <Badge className="absolute left-3 top-3 flex items-center gap-1">
             <Clock className="h-3 w-3" /> {tour.durationDays} {t("days")} / {tour.durationNights} {t("nights")}
           </Badge>
