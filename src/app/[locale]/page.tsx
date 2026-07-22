@@ -9,6 +9,7 @@ import { CtaSection } from "@/components/home/cta-section";
 import { DestinationCard } from "@/components/cards/destination-card";
 import { TourCard } from "@/components/cards/tour-card";
 import { BlogCard } from "@/components/cards/blog-card";
+import { Reveal } from "@/components/shared/reveal";
 import { setRequestLocale } from "next-intl/server";
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -32,8 +33,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="container">
           <SectionHeading eyebrow="Where to go" title={t("featuredDestinations")} viewAllHref="/destinations" viewAllLabel="View All" />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {destinations.map((d) => (
-              <DestinationCard key={d.id} d={d} />
+            {destinations.map((d, i) => (
+              <Reveal key={d.id} delay={i * 0.06}>
+                <DestinationCard d={d} />
+              </Reveal>
             ))}
           </div>
         </div>
@@ -47,8 +50,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="container">
           <SectionHeading eyebrow="Curated Itineraries" title={t("featuredTours")} viewAllHref="/tours" viewAllLabel="View All" />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {tours.map((tour) => (
-              <TourCard key={tour.id} tour={tour} />
+            {tours.map((tour, i) => (
+              <Reveal key={tour.id} delay={i * 0.06}>
+                <TourCard tour={tour} />
+              </Reveal>
             ))}
           </div>
         </div>

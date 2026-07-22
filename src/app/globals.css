@@ -58,6 +58,12 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(150%); }
+  100% { transform: translateX(150%); }
+}
+
 [dir="rtl"] .flip-rtl { transform: scaleX(-1); }
 
 ::selection { background: #f5a623; color: #0d0d0d; }
