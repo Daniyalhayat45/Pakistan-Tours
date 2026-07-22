@@ -11,7 +11,7 @@ export function HotelCard({ hotel }: { hotel: { slug: string; name: string; city
   return (
     <Card className="overflow-hidden transition-shadow hover:shadow-xl">
       <Link href={`/${locale}/hotels/${hotel.slug}`} className="block relative aspect-[4/3] w-full overflow-hidden">
-        <Image src={hotel.coverImage} alt={hotel.name} fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
+        <SafeImage src={hotel.coverImage} alt={hotel.name} fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" />
       </Link>
       <CardContent className="p-5">
         <div className="mb-1 flex items-center gap-1 text-xs text-muted-foreground"><MapPin className="h-3 w-3" /> {hotel.city}</div>
